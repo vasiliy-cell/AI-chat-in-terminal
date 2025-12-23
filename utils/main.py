@@ -1,7 +1,6 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Markdown, Static, TextArea
+from textual.widgets import Input, Markdown, Static
 from textual.containers import VerticalScroll, Vertical
-from textual.events import Key
 from api import stream_request, APIError
 import os
 
@@ -23,45 +22,34 @@ class AICLI(App):
             return "ASCII art file not found."
 
     def compose(self) -> ComposeResult:
+        # Главный вертикальный контейнер
         with Vertical(id="main", classes="centered"):
             yield Static(self.ascii_art, id="ascii-art")
             yield Static("Hey there! Let’s jump in", id="welcome-text1")
             yield Static("linux is the best OS", id="welcome-text2")
+            yield VerticalScroll(id="chat-panel")  # <-- вертикальный скролл
+            yield Input(id="user-input", placeholder="Type your message...")
 
-            yield VerticalScroll(id="chat-panel")
+    async def on_input_submitted(self, event: Input.Submitted) -> None:
+        user_request = event.value.strip()
+        event.input.value = ""
 
-            yield TextArea(
-                id="user-input",
-                placeholder="Type your message...",
-            )
+        if not user_request:
+            return
 
-    async def on_key(self, event: Key) -> None:
-        textarea = self.query_one("#user-input", TextArea)
-
-
-        if event.key == "enter" and not event.shift:
-            event.prevent_default()
-
-            user_request = textarea.text.strip()
-            textarea.text = ""
-
-            if not user_request:
-                return
-
-            await self.handle_user_message(user_request)
-
-    async def handle_user_message(self, user_request: str):
         chat_panel = self.query_one("#chat-panel", VerticalScroll)
 
+        # Добавляем Markdown как раньше
         user_md = Markdown(f"**You:** {user_request}\n")
         chat_panel.mount(user_md)
 
         assistant_md = Markdown("**Assistant:**\n\n")
         chat_panel.mount(assistant_md)
 
+        # Скроллим вниз при новых сообщениях
         chat_panel.scroll_end(animate=False)
 
-        # Убираем приветствие
+        # Скрываем приветствие
         self.query_one("#welcome-text1", Static).update("")
         self.query_one("#welcome-text2", Static).update("")
         self.query_one("#ascii-art", Static).update("")
@@ -80,3 +68,4 @@ class AICLI(App):
 
 if __name__ == "__main__":
     AICLI().run()
+
