@@ -1,0 +1,74 @@
+Screen {
+    background: #222629;
+    border: round #3b6ea5;   
+    padding: 1 2;
+}
+
+#chat-panel {
+    overflow-y: auto;
+}
+
+
+* {
+    scrollbar-color: #3b6ea5;
+    scrollbar-color-active: #4aa3df;
+    scrollbar-background: #222629;
+    scrollbar-background-hover: #222629;
+}
+
+#user-input {
+    dock: bottom;
+    height: auto;
+    min-height: 1;
+    max-height: 10;
+    background: #222629;
+    margin: 0;
+    padding: 0 2;
+    color: #ffffff;
+    border: round transparent #4aa3df;  
+}
+
+#welcome-text1 {
+    content-align: center middle;
+    color: #6a6e71;
+    padding-bottom: 1;
+}
+
+#welcome-text2 {
+    content-align: center middle;
+    color: #464a4f;
+}
+
+#ascii-art {
+    content-align: center middle;
+    color: #4aa3df;   
+}
+
+/* Markdown */
+
+Markdown .strong {
+    color: #3fa9f5;   
+}
+
+Markdown .emph {
+    color: #FFE400;   
+}
+
+Markdown .code {
+    color: #4aa3df;
+    background: #141414;
+    padding: 0 1;
+    border: round #4aa3df;
+}
+
+Markdown .heading {
+    color: #00BFFF;
+}
+
+Markdown .link {
+    color: #7aa2f7;   
+}
+
+Markdown .code_block {
+    color: #6f8cff;
+}
