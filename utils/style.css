@@ -10,23 +10,46 @@ Screen {
 
 
 * {
-    scrollbar-color: #3b6ea5;
-    scrollbar-color-active: #4aa3df;
+    scrollbar-color: #443ba5;
+    scrollbar-color-active: #4a6ddf;
     scrollbar-background: #222629;
     scrollbar-background-hover: #222629;
 }
 
-#user-input {
+#input-row {
+    height: auto;
+    width: 100%;
+    padding: 1;
     dock: bottom;
+}
+
+
+#user-input {
+    width: 1fr;
+    
     height: auto;
     min-height: 1;
     max-height: 10;
     background: #222629;
-    margin: 0;
-    padding: 0 2;
+    /* margin: 0;
+    padding: 0 2; */
     color: #ffffff;
-    border: round transparent #4aa3df;  
+    border: round transparent #4a6ddf;  
 }
+
+
+
+#abort-btn {
+    width: auto;    
+    margin-left: 1; 
+    background: #222629;
+    color: #ffffff;
+    border: round transparent #4a6ddf;  
+}
+
+
+
+
 
 #welcome-text1 {
     content-align: center middle;
@@ -41,8 +64,9 @@ Screen {
 
 #ascii-art {
     content-align: center middle;
-    color: #4aa3df;   
-}
+    color: #4a6ddf;   
+    
+}           
 
 /* Markdown */
 
